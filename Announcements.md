@@ -10,3 +10,5 @@ You MUST download this before class on Wednesday
    To download a file please click the file of interest and then on the top right corner; click the downward arrow button
 
 3) If you are having issues with the software carpentry homework you can do this alternate training from microsoft which takes less than an hour: https://learn.microsoft.com/en-us/training/modules/bash-introduction/0-introduction  try to do this before Thursday
+
+4) Please bring a calculator to class today; you can also use your phones or laptops as calculators
