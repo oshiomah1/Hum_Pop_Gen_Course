@@ -248,12 +248,6 @@ cp /path/to/source/file .
 cp /path/to/source/file /path/to/destination/file
 ```
 
-## Question 11a. What is the code you would use to copy `numbers.txt` from the grapes folder to the orange folder? Assume your curre
-
-```bash
-cp numbers.txt /path/to/orange/folder
-```
-
 ## Question 11a. What is the code you would use to copy numbers.txt from the grapes folder to the orange folder? Assume your current directory is the grapes folder
 
 ```bash
@@ -267,6 +261,12 @@ cp numbers.txt /path/to/orange/folder
 
 ```
 
+### `mv`
+
+#### We can use `mv` to move or rename files. I want you to read this https://www.geeksforgeeks.org/mv-command-linux-examples/ 
+#### Then navgiagte to the `apple` directory
+#### Use `touch` to create a file called `apple_types.txt`
+#### Then use `mv` to rename `apple_types.txt` to `apple_breeds.txt`
 ### `rm`
 Remove files or directories. This command is used to delete files or directories. Be very careful! Once you delete a file in the command line it is gone FOREVER. Don't be afraid in this situation though, we aren't working with super important files
 
@@ -278,14 +278,8 @@ navigate to the grape folder and practice using rm on all the files in this fold
 ```bash
 rm -r directory_to_remove
 ```
-### Now remove all the fruity directories
+### Now remove all the fruity directories. I would advice you to go back to the top of the page and repeat this tutorial at least one more time
 
-### `mv`
-
-#### We can use `mv` to move or rename files. I want you to read this https://www.geeksforgeeks.org/mv-command-linux-examples/ 
-#### Then navgiagte to the `apple` directory
-#### Use `touch` to create files called `apple_types.txt`
-#### Then use `mv` to rename `apple_types.txt` to `apple_breeds.txt`
 
 ## Final task 
 #### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create 2 folders called `Cancer` and `Favorite_Things`. Replicate the file structure of the images below, using nano to create the `.txt` files. Each .txt file will be a list of 3-5 that you curate yourself or use the internet. Ask Oshiomah to clarify if you have questions. Now have fun!
