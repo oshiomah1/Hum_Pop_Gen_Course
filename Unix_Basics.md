@@ -194,7 +194,7 @@ ten
 Answer:
 ```
 
-#### Now use nano to edit numbers.txt by adding "eleven" and "twelve"
+### Now use nano to edit numbers.txt by adding "eleven" and "twelve"
 
 ## Question 10b:  Now do you notice a difference between using  `head` and  `tail` on `numbers.txt` ? what's the difference?
 
@@ -280,11 +280,23 @@ rm -r directory_to_remove
 ```
 ### Now remove all the fruity directories
 
+### `mv`
+
+#### We can use `mv` to move or rename files. I want you to read this https://www.geeksforgeeks.org/mv-command-linux-examples/ 
+#### Then navgiagte to the `apple` directory
+#### Use `touch` to create files called `apple_types.txt`
+#### Then use `mv` to rename `apple_types.txt` to `apple_breeds.txt`
+
 ## Final task 
-#### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create 2 folders called `Cancer` and `Favorite_Things`
+#### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create 2 folders called `Cancer` and `Favorite_Things`. Replicate the file structure of the images below, using nano to create the `.txt` files. Each .txt file will be a list of 3-5 that you curate yourself or use the internet. Ask Oshiomah to clarify if you have questions. Now have fun!
 
 
-#### In the task_1 folder I want you to create a folder called cancer
+![Description or title of image 1](pic1.png)
+
+
+
+![Description or title of image 2](pic2.png)
+
 
 
 
