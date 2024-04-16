@@ -30,6 +30,14 @@ We just want to work with the `.bim` and `.fam` files today so use `rm` to delet
 ```bash
 Type answer here
 ```
+Now let's go over two plink binary file structures the `.fam` and `.bim` 
+
+![Description or title of image 1](bim_file.png)
+
+
+![Description or title of image 1](fam_file.png)
+
+#### Now experiment with using `head` and  `less` and `cat` commands we learnt from our last lesson to explore your plink files. 
 
 ## Exercise 1: Using `grep` to Filter Data
 
