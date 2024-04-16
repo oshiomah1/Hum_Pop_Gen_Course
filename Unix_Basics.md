@@ -189,26 +189,55 @@ eight
 nine
 ten
 ```
-## Question 10a:  Do you notice a difference between head and tail on `numbers.txt`
+## Question 10a:  Do you notice a difference between using `head` and `tail` on `numbers.txt`
 ```bash
 Answer:
 ```
 
 #### Now use nano to edit numbers.txt by adding "eleven" and "twelve"
 
-## Question 10b:  Now do you notice a difference between head and tail on `numbers.txt` whats the difference?
+## Question 10b:  Now do you notice a difference between using  `head` and  `tail` on `numbers.txt` ? what's the difference?
+
 ```bash
-Answer:
+Answer: 
+```
+
+### `cp`
+
+We can use cp to copy. One usage of this would be to make a duplicate of `numbers.txt` called `backup_numbers.txt`
+
+```bash
+cp numbers.txt backup_numbers.txt
+```
+
+We can also create this duplicate in the orange directory we created earlier but we would use the format below
+
+```bash
+cp /path/to/source/file /path/to/destination/file
+```
+### In the synta above, since we are already in the grape directory we don't ne
+## Question 11. What is the code you would use to copy numbers.txt from the grapes folder to the orange folder? There are multiple answers!
+
+```bash
+cp numbers.txt /path/to/orange/folder
 ```
 
 ### `rm`
-Remove files or directories. This command is used to delete files or directories.
+Remove files or directories. This command is used to delete files or directories. Be very careful! Once you delete a file in the command line it is gone FOREVER. Don't be afraid in this situation though, we aren't working with super important files
 
 ```bash
-rm file_or_directory_to_remove
+rm file_to_remove
 ```
+navigate to the grape folder and practice using rm on all the files in this folder. then run `cd ..` to go up a folder and use `rm` to remove the orange folder. what happens? we can't use rm on a folder we have to use the syntax below
 
-Assignment
+```bash
+rm -r directory_to_remove
+```
+### Now remove all the fruity directories
+
+## Final task 
+#### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create a folder called `task_1`
+#### In the task_1 folder I want you to create a folder called cancer
 
 
 
