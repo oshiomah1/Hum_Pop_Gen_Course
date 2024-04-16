@@ -208,18 +208,63 @@ We can use cp to copy. One usage of this would be to make a duplicate of `number
 
 ```bash
 cp numbers.txt backup_numbers.txt
+
+```
+We can also use:  
+
+Note: You can't just copy-paste the line belowe into your terminal; what do you have to change?
+
+```bash
+cp /share/ant157/students/yourname/grape/numbers.txt /share/ant157/students/yourname/grape/backup_numbers.txt
 ```
 
-We can also create this duplicate in the orange directory we created earlier but we would use the format below
+or
+
+```bash
+cp numbers.txt /share/ant157/students/yourname/grape/backup_numbers.txt
+```
+
+or
+
+```bash
+cp /share/ant157/students/yourname/grape/numbers.txt backup_numbers.txt
+```
+
+since we are already in the the grape folder you don't need to write the "full" (`absolute`) path and can just use the file name (`relative path`) instead. A generalization of this syntax is
 
 ```bash
 cp /path/to/source/file /path/to/destination/file
 ```
-### In the synta above, since we are already in the grape directory we don't ne
-## Question 11. What is the code you would use to copy numbers.txt from the grapes folder to the orange folder? There are multiple answers!
+
+If you are already in the directory where you want the file to copied to you can replace `/path/to/destination/file` with a `.`
+
+```bash
+cp /path/to/source/file .
+```
+
+### In addition, we can also use `cp` to copy numbers.txt from the grape directory into the orange directory 
+
+```bash
+cp /path/to/source/file /path/to/destination/file
+```
+
+## Question 11a. What is the code you would use to copy `numbers.txt` from the grapes folder to the orange folder? Assume your curre
 
 ```bash
 cp numbers.txt /path/to/orange/folder
+```
+
+## Question 11a. What is the code you would use to copy numbers.txt from the grapes folder to the orange folder? Assume your current directory is the grapes folder
+
+```bash
+
+```
+
+## Question 11b. What is another way you could copy numbers.txt from the grapes folder to the orange folder? Assume your current directory is the orange folder.
+### Hint: You can use a `.`
+
+```bash
+
 ```
 
 ### `rm`
@@ -228,7 +273,7 @@ Remove files or directories. This command is used to delete files or directories
 ```bash
 rm file_to_remove
 ```
-navigate to the grape folder and practice using rm on all the files in this folder. then run `cd ..` to go up a folder and use `rm` to remove the orange folder. what happens? we can't use rm on a folder we have to use the syntax below
+navigate to the grape folder and practice using rm on all the files in this folder. then run `cd ..` to go up a folder and use `rm` to remove the orange folder. What happens? we can't use `rm` on a folder we have to use the syntax below:
 
 ```bash
 rm -r directory_to_remove
@@ -236,7 +281,9 @@ rm -r directory_to_remove
 ### Now remove all the fruity directories
 
 ## Final task 
-#### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create a folder called `task_1`
+#### I want you to tie all the knowledge you learnt today. Navigate to your personal student directory and create 2 folders called `Cancer` and `Favorite_Things`
+
+
 #### In the task_1 folder I want you to create a folder called cancer
 
 
