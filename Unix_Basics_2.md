@@ -5,7 +5,7 @@ This tutorial will help you master essential Unix commands for data wrangling. W
 
 ## Exercise 0: Getting Started and Review of Unix Basics 1
 
-First you must make a directory called `Unix_Basics_2` using `mkdir`. Next, ensure you have the plink binary Ethiopian files in your `Unix_Basics_2`.  These files are located
+First you must make a directory called `Unix_Basics_2` using `mkdir`. Next, ensure you have the plink binary Ethiopian files into your `Unix_Basics_2`.  These files are located
 in the `/share/ant157/unix_test_data` folder. Please use the `cp` command to copy the `.fam` `.bim` and `.bed` files into your folder. 
 
 ### Question 1: How would you copy these files into your folder?
@@ -13,11 +13,20 @@ in the `/share/ant157/unix_test_data` folder. Please use the `cp` command to cop
 Type answer here
 ```
 
-### Wildcards
+### Wildcards `*`
 
-Instead of copying these files one by one you can also use a wildcard, `*`, to copy files. Run `cp /share/ant157/unix_test_data/Ethiopians* .`. What do you notice? 
+Instead of copying these files one by one you can also use a wildcard, `*`, to copy files.  
+Run `cp /share/ant157/unix_test_data/Ethiopians* .`  
+What do you notice? 
 
 ### Question 2: What do you notice in your folder when you use a wildcard to copy the files? 
+```bash
+Type answer here
+```
+
+We just want to work with the `.bim` and `.fam` files today so use `rm` to delete the other Ethiopian files you copied over with a wild card
+
+### Question 3: How did you use `rm` to erase the unwanted files
 ```bash
 Type answer here
 ```
