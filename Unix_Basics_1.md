@@ -47,14 +47,15 @@ We are back to the course page. If we wanted to go two levels up we could run
 ```bash
 cd ../..
 ```
-We can see that we just separate the `..` by a `/`. 
+Run the command above. We can see that we just separate the `..` by a `/`. 
 
-## Question 1: How can I go three levels up?
+## Question 1: How can I go three levels up? I want you to travel 3 levels up now!
 
 ```bash
 Answer:
 ```
-### Now lets go back to the course page. Use the `cd' command to navigate to the 
+
+### Now lets go back to the course page. Use the `cd' command to navigate to the course directory `cd /share/ant157/`
 
 ### `ls`
 List directory contents. This command shows you the files and directories in your current directory.
@@ -126,7 +127,7 @@ Now from this folder we can create another file in the orange directory. In your
 instead of navigating into the orange folder and then creating a new file, we could
 How do we know if it worked? One way is to run `cd orange` and then run `ls` . Alternatively we can use one line and run `ls orange`
 
-## Navigate to your personal student directory if you aren't there already. Now let's create a new file called pear_file.txt. Please run `touch pear/pear_file.txt`
+## Navigate back one level up your personal student directory if you aren't there already. Now let's create a new file called pear_file.txt. Please run `touch pear/pear_file.txt`
 
 What happens when you do that?
 
@@ -140,7 +141,7 @@ error message:
 #### Option B  run `mkdir pear` then `cd pear` then `touch pear_file.txt`
 
 
-## Question 8: In 4 or more sentences, compare and contrast options A and B shown above. You will have to research what the `-p` flag is doing when used with -mkdir
+## Question 8: In 3 or more sentences, compare and contrast options A and B shown above. You will have to research what the `-p` flag is doing when used with -mkdir
 #### You can use this link to help you https://www.geeksforgeeks.org/mkdir-command-in-linux-with-examples/
 
 ```bash
@@ -159,7 +160,7 @@ What do you see? I want you to type `grapes are yummy!`. To exit nano press CTRL
 ### `less` `more` `cat`
 
 These are all different ways of viewing files. An example usage is `less filename.txt`
-## Question 9a:  use `less`, `more` and  `cat` separately to view `grape_file_1.txt`. What do you see? Do you notice a difference?
+## Question 9a:  use `less`, `more` and  `cat` separately to view `grape_file_1.txt`. What do you see? Do you notice a difference? If your screen lags or freezes type `Q` on your keyboard to escape
 
 ```bash
 Answer:
@@ -176,7 +177,6 @@ You can use head `head` and `tail` to view the first 10 lines and last 10 lines 
 #### Now lets create a new text file called `numbers.txt` . Use nano to create this file.
 
 Copy and paste the following text in numbers.txt 
-
 ```
 one
 two
@@ -194,7 +194,7 @@ ten
 Answer:
 ```
 
-### Now use nano to edit numbers.txt by adding "eleven" and "twelve"
+## Now use nano to edit numbers.txt by adding "eleven" and "twelve" to the bottom of the text file
 
 ## Question 10b:  Now do you notice a difference between using  `head` and  `tail` on `numbers.txt` ? what's the difference?
 
@@ -212,12 +212,11 @@ cp numbers.txt backup_numbers.txt
 ```
 We can also use:  
 
-Note: You can't just copy-paste the line belowe into your terminal; what do you have to change?
 
 ```bash
 cp /share/ant157/students/yourname/grape/numbers.txt /share/ant157/students/yourname/grape/backup_numbers.txt
 ```
-
+Note: You can't just copy-paste the line below into your terminal; what do you have to change?
 or
 
 ```bash
@@ -236,13 +235,13 @@ since we are already in the the grape folder you don't need to write the "full" 
 cp /path/to/source/file /path/to/destination/file
 ```
 
-If you are already in the directory where you want the file to copied to you can replace `/path/to/destination/file` with a `.`
+If you are already in the directory where you want the file to copied to, and you're copyin a file from a different directory you can replace `/path/to/destination/file` with a `.` . A `.` means current path
 
 ```bash
 cp /path/to/source/file .
 ```
 
-### In addition, we can also use `cp` to copy numbers.txt from the grape directory into the orange directory 
+### In addition, we can also use `cp` to copy numbers.txt from the grape directory into the orange directory. Remember the syntax is : 
 
 ```bash
 cp /path/to/source/file /path/to/destination/file
@@ -264,11 +263,12 @@ cp /path/to/source/file /path/to/destination/file
 ### `mv`
 
 #### We can use `mv` to move or rename files. I want you to read this https://www.geeksforgeeks.org/mv-command-linux-examples/ 
-#### Then navgiagte to the `apple` directory
+#### Then navigate to the `apple` directory
 #### Use `touch` to create a file called `apple_types.txt`
 #### Then use `mv` to rename `apple_types.txt` to `apple_breeds.txt`
+
 ### `rm`
-Remove files or directories. This command is used to delete files or directories. Be very careful! Once you delete a file in the command line it is gone FOREVER. Don't be afraid in this situation though, we aren't working with super important files
+This command is used to delete files or directories. Be very careful! Once you delete a file in the command line it is gone FOREVER. Don't be afraid in this situation though, we aren't working with super important files
 
 ```bash
 rm file_to_remove
