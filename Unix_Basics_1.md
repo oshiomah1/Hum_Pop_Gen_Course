@@ -97,7 +97,7 @@ mkdir new_directory
 ```
 If you wanted to make multiple directories at once you can run  ```mkdir new_directory1 new_directory2```
 
-## Question 4: What line of code do you need to make 3 directories at once called `orange` `grape` `apple` ? (It must be just one line of code !)
+## Question 4: What line of code do you need to make 3 directories, one called `orange`, one called `grape`, one called `apple` ? (It must be just one line of code !)
 
 ```bash
 Answer: 
