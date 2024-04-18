@@ -155,7 +155,9 @@ Run
 ```bash
 nano grape_file_1.txt
 ```
-What do you see? I want you to type `grapes are yummy!`. To exit nano press CTRL + X on your keyboard. Then your screen will say `Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?` type Y (meaning Yes). Then you'll see `File Name to Write: grape_file_1.txt` then tap Enter/return on your keyboard
+What do you see? I want you to type `grapes are yummy!`. To exit nano press CTRL + X on your keyboard. Then your screen will say `Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?  
+` type Y (meaning Yes). Then you'll see `File Name to Write: grape_file_1.txt`   
+then tap Enter/return on your keyboard
 
 ### `less` `more` `cat`
 
