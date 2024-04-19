@@ -1,7 +1,9 @@
+# Objectives
+## Welcome to the introductory Unix commands tutorial! This guide will cover some fundamental commands that are essential for navigating and manipulating files in a Unix-like environment. At the end of this worksheet you should be able to:
 
-# Basic Unix Commands Tutorial
+### Use basic command such `pwd` ,`cd`, ,`mkdir` , `rm`
+### Make complex file structures in their HPCC 
 
-Welcome to the introductory Unix commands tutorial! This guide will cover some fundamental commands that are essential for navigating and manipulating files in a Unix-like environment.
 
 ## Navigating the Filesystem
 First we must ssh into the tadpole HPCC. Do you remember how? Tip: Make sure you save your password somewhere i
