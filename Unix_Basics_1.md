@@ -1,8 +1,8 @@
 # Objectives
 ## Welcome to the introductory Unix commands tutorial! This guide will cover some fundamental commands that are essential for navigating and manipulating files in a Unix-like environment. At the end of this worksheet you should be able to:
 
-### Use basic command such `pwd` ,`cd`, ,`mkdir` , `rm`
-### Make complex file structures in their HPCC 
+### 1) Use basic command such `pwd` ,`cd`, ,`mkdir` , `rm`
+### 2) Make complex file structures in their HPCC 
 
 
 ## Navigating the Filesystem
