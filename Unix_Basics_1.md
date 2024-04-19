@@ -240,7 +240,9 @@ since we are already in the the grape folder you don't need to write the "full" 
 cp /path/to/source/file /path/to/destination/file
 ```
 
-If you are already in the directory where you want the file to copied to, and you're copyin a file from a different directory you can replace `/path/to/destination/file` with a `.` . A `.` means current path
+If you are already in the directory where you want the file to copied to, and you're copyin a file from a different directory you can replace `/path/to/destination/file` with a `.`  
+
+A `.` means  your current path. It would be an alias to the output of `pwd`
 
 ```bash
 cp /path/to/source/file .
