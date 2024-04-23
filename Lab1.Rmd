@@ -1,0 +1,443 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+## ANT157L Problem Set 1: Allelic and genotypic frequencies with application to SNP array data
+
+Name:
+
+```         
+Type your name here
+```
+
+**Due Date: May 1st \@ 5pm (but preferably earlier)**
+
+### Goals:
+
+At the end of this exercise, you should be able to: - Record allele
+frequencies from dbSNP and plink - Understand how SNP array data are
+formatted - Perform simple Bash command line executions - Identifying
+missing genotypes / individuals with high missing data - Use
+Hardy-Weinberg to remove problematic genotypes from a SNP array dataset
+
+## Task 1. Manipulate SNP array data using PLINK
+
+PLINK is a piece of software that allows users to perform various data
+manipulation and analyses on genome-wide SNP data. Today we are going to
+focus on the former.
+
+A very useful online manual is available for PLINK here:
+<http://zzz.bwh.harvard.edu/plink/dataman.shtml> and/or
+<https://www.cog-genomics.org/plink/1.9/general_usage>
+
+#### Log on to the Genome Center cluster.
+
+```         
+ssh yourUserName@tadpole.genomecenter.ucdavis.edu
+```
+
+Then navigate to your personal folder in the `/students/`
+directory. Then make a directory called `Lab_1 `
+
+You will be using PLINK software. In order to use this, you need to load
+the software module. Please copy-paste the code-chunk below
+
+```         
+module load plink/1.90p
+```
+
+The command module load will load different types of software installed
+on the Genome Center cluster. You need to do this when starting each
+session.
+
+### Question 1 [3 pts]
+Please use the `cp` command to copy the `Ethiopians_chr1.fam` `Ethiopians_chr1.bim` and `Ethiopians_chr1.bed` files from the `/share/ant157/data/Ethiopians/` directory to the`Lab_1` directory you just created.
+
+Now use `head` to explore the first line of the `Ethiopians_chr1.fam` file
+and the `Ethiopians_chr1.bim` file. 
+
+What is the population and individual ID of the first individual in the
+Ethiopians_chr1.fam file?
+
+```         
+(Type your answer here)
+```
+
+What is the physical position of the fifth SNP in the .bim file?
+
+```         
+(Type your answer here)
+```
+
+PLINK files can get very large, containing genotype information for
+hundreds of thousands of individuals at millions of SNPs, so we do not
+want to have to use `less` or `more` or `cat` to view and manipulate the data. Instead we can
+use PLINK to read the file and tell us something about the structure of
+our data like so:
+
+```         
+plink --bfile /path/to/Ethiopians_chr1 --freq
+```
+
+The `--bfile` argument informs PLINK what dataset to look for, in this
+case the path to `Ethiopians_chr1` (it will automatically look for `.bed`, `.bim`
+and `.fam` endings of the dataset in that folder). Running this command will print a
+summary of the contents of the input dataset to screen. It also prints a
+summary of the output dataset if any manipulations are performed (in
+this case, we used the `--freq` flag to calculate allele frequencies).
+But ALWAYS make sure you are only working in your own directory, and NOT
+the data directory.
+
+
+### Question 2 [1 pt]
+
+Edit the code chunk above to specify the path to the `Ethiopians_chr1` binary file
+
+```         
+(Type your answer here)
+```
+
+If you followed the instructions at the start of the class correctly you should be in the
+`Lab_1` folder in your personal directory you created earlier. That means you technically 
+don't have to specify the path since you're already there. Running this below should suffice:
+
+```         
+plink --bfile Ethiopians_chr1 --freq
+```
+### Question 3.1 [3 pt]
+
+After running the PLINK command above, look at the plink.log file.
+How many SNPs, males and females are in the `Ethiopians_chr1` dataset?
+
+```         
+(Type your answer here)
+```
+
+### Question 3.2 [3 pt]
+
+I want us to update the binary file for missing sex information but first you
+must identify the individuals who are missing sex information. As a reminder, 1 means male, 2 means female, and 0 means missing sex information  
+
+
+Do you remember what binary file to look at?
+
+```         
+(Type your answer here)
+```
+what column is sex in this file (and all files like this?) 
+
+```         
+(Type your answer here)
+```
+
+Now that we know the file and column to look at, use the `awk` command we learnt 
+earlier to identify individuals with missing sex and write them to a file called "missing_sex.txt" . Make sure to print the family ID, individual ID, and sex column in your `awk` command.
+
+[**Hint**: See exercise 3 and Question 5a from Unix_Basics_2 to refresh your memory] 
+
+```         
+(Type your awk code here)
+
+```
+
+Now view the `missing_sex.txt` file you created. What do you notice ?
+
+```         
+(Type your answer here)
+
+```
+These missing individuals are supposed to be females. We want to replace the zeros with 2. First we should use awk to create a 3 column file of the missing sex individuals of the format family ID, individual ID, new_sex, AND write the output into a file called `sex_update.txt`
+
+
+We will apply `awk` on the `missing_sex.txt` to create this  `sex_update.txt`
+Your awk code above has partially done this but now you need to edit it to accommodate the new changes. 
+
+Run the code below: 
+```         
+awk '{print $1, $2, 2}' missing_sex.txt > sex_update.txt
+
+```
+
+Notice that we wanted the 3rd column to be `2` so instead of using a `$` sign on the 3rd argument in the print flag we just typed `2` as the third argument in the print command, ensuring that all rows in column 3 just say `2`
+
+
+We are almost there! Now we can finally use plink to update all the binary files with the updated
+sex information. We went through the trouble of creating `sex_update.txt` because that's the language plink needs. (we have to feed it a 3 column file of the missing sex individuals of the format <family ID> <individual ID> <new sex> )
+
+The format to do this will be: 
+
+`plink --bfile original_dataset --update-sex sex_update.txt --make-bed --out updated_dataset`
+
+You have to replace `original_dataset` with the actual binary file name and `updated_dataset` with the file you want to name the new file. In this case `updated_dataset` should be `Ethiopians_chr1_Update_Sex`
+
+What code will you use to update sex?
+
+```         
+Type code here
+```
+
+### Question 4 [4 pts]
+
+When you accessed the SNP arrays files with PLINK, the `.bed` file contains the genotype data and is no longer human-readable. However the `.bim` and `.fam`
+files are. What information is contained in them?
+
+```         
+(Type your answer here)
+```
+
+------------------------------------------------------------------------
+
+Now let's start manipulating the dataset. The "family" (in this case,
+population label) and individual IDs for each of the individuals can be
+found in the `.fam` file. Let's remove the last five individuals from
+the dataset. In order to do this, we need to first make a file
+containing these individuals that we can read into PLINK. You can do this
+easily with a combination of the tail and awk commands you learned last
+week.
+
+How would you use `tail` to view the last 5 individuals from Ethiopians_chr1.fam
+and write it to a file called `temp_file.txt`
+
+```         
+tail -5 Ethiopians_chr1.fam > temp_file.txt
+```
+
+How would you use `awk` to select only the first two columns of `temp_file.txt`
+and write it to a file called `samples2remove.txt` ?
+
+```         
+awk '{print $1, $2}' temp_file.txt > samples2remove.txt
+```
+Great! now remove temp_file.txt. Run `rm temp_file.txt`. Let's recreate temp_file.txt using 
+one line of code. You will use a pipe to connect your tail and awk command. How would you do this?
+
+```         
+tail -5 Ethiopians_chr1.fam | awk '{print $1, $2}' > samples2remove.txt
+```
+
+The samples2remove.txt file will look like this:
+
+```         
+SHEKO BYK046
+SHEKO BYK047
+SHEKO BYK048
+SHEKO BYK049
+SHEKO BYK050
+```
+
+We can now use this file to tell PLINK to remove these five samples from
+the dataset, and produce a subsetted dataset like so:
+
+```         
+plink --bfile Ethiopians_chr1 --remove samples2remove --make-bed --out Ethiopians_chr1_rem5samples
+```
+
+### Question 5 [1 pt]
+
+What happens when you use the `--keep` argument instead of the
+`--remove` argument?
+
+```         
+(Type your answer here)
+```
+
+## Task 2: Quality Filtering for SNP Data
+
+### Question 6 [1 pt]
+
+Use the skills learned so far and the PLINK manual to create a dataset
+with only the top half of SNPs. What is the genotyping rate of the new
+dataset? Your new datset should be called `Ethiopians_chr1_TopHalf`
+
+```         
+(Type your answer here)
+```
+
+PLINK can also be used to filter data based on some criteria. One common
+operation is to filter the data for SNPs below a certain minor allele
+frequency threshold. For example, the remove all SNPs with a sample
+allele frequency less than 5% we can run the following command:
+
+```         
+plink --bfile Ethiopians_chr1 --maf 0.05 --make-bed --out Ethiopians_chr1_freq0.05
+```
+
+### Question 7 [1 pt]
+
+How many SNPs are left when you filter the data using a minor allele
+frequency of 5% command?
+
+```         
+(Type your answer here)
+```
+
+Another common quality control measure is to filter for missingness.
+This allows us to filter out SNPs that are missing (i.e. not genotyped) in
+some proportion of our samples. The command we use to do this is the
+`--geno` flag followed by a decimal number indicating the threshold at
+which to filter. For example, to filter out all SNPs that are missing in
+\>3% of the individuals, I would use `--geno 0.03` in my command. If I wanted to filter out out all SNPs that are missing in
+\>1% of the individuals, I would use `--geno 0.01`
+
+### Question 8 [1 pt]
+
+Write the full code to filter SNPs using the  `--geno` flag on the `Ethiopians_chr1`  binary file you created using a genotyping QC command specifying that a SNP can have at most 5%
+missing data? Your output file should be called `Ethiopians_chr1_Geno_5pct`
+
+```         
+(Type your answer here)
+```
+How many SNPs are left when you run this code ?
+
+```         
+(Type your answer here)
+```
+
+Another common quality control filter for SNP array data is to remove
+loci whose genotypes are not in Hardy-Weinberg equilibrium. This pattern
+at a locus may indicate that the SNP calling algorithm that identifies
+the "AA AB BB" genotypes has not correctly identified the proportions of
+the three different genotypes using measures of fluorescence from the
+array probes.
+
+### Question 9 [2 pts]
+
+What is another reason that a given locus may not have genotype
+proportions in Hardy-Weinberg equilibrium? Explain.
+
+```         
+(Type your answer here)
+```
+
+Read the page on Hardy-Weinberg calculations in plink:
+<http://zzz.bwh.harvard.edu/plink/summary.shtml#hardy>
+
+
+To run the plink Hardy-Weinberg equilibrium test you use the format 
+`plink --bfile mydata --hardy`  This will generate a
+"plink.hwe" output summary of the SNPs in this array dataset. Then check
+the SNP rs12075 on chr1 in your plink.hwe output file
+
+> Hint: look for a flag to use with the grep function that will let you
+> search for exact matches.
+
+### Question 10 [3 pts]
+
+What is the observed proportion of heterozygotes in these five
+populations? What is the expected proportion of heterozygotes based on
+allele frequencies? Is this SNP in Hardy-Weinberg equilibrium?
+
+```         
+(Type your answer here)
+```
+
+Now read the command line information for a HWE filter:
+<https://zzz.bwh.harvard.edu/plink/summary.shtml#hardy>
+
+We can also filter SNPs that violate Hardy-Weinberg expectations like
+so:
+
+```         
+plink --bfile Ethiopians_chr1 --hwe 0.001 --make-bed --out Ethiopians_chr1_hwe0.001
+```
+
+Here, the number after the `--hwe` argument is the p-value significance threshold
+that PLINK will use to decide to remove SNPs. For example with `--hwe 0.001` you're specifying that PLINK should filter out all variants that have a p-value of less than 0.001 in the Hardy-Weinberg Equilibrium test, indicating a significant deviation from HWE.
+
+### Question 11 [1 pts]
+
+Are more or fewer SNPs left when you filter the original data `Ethiopians_chr1` for a minor allele frequency of 5% versus when you filter the original data `Ethiopians_chr1` a HW p-value of 0.001? 
+
+```         
+(Type your answer here)
+```
+
+### Question 12 [1 pts]
+
+When we ran the `--hwe 0.001` flag earlier we considered the five populations a single group. How many SNPs are removed ?
+
+```         
+(Type your answer here)
+```
+
+Next, we want to find out how many are removed when you perform HW
+filtering on each population separately with a p\<0.0001. \> Hint: Use
+grep command to extract a certain population from the .fam file.
+
+Then you will need to generate 5 new input files from the original
+binary files by using `--keep` (as we have done before) and then apply
+the HWE filter again for each of them.
+
+Refer to <http://zzz.bwh.harvard.edu/plink/dataman.shtml#keep>
+
+### Question 13 [5 pts]
+
+List the number of SNPs excluded for all 5 groups tested separately:
+Sheko, Bench, Chabu, Majang, Shekkacho
+
+```         
+(Type your answer here)
+```
+
+### Question 14 [3 pts]
+
+Why does the Hardy-Weinberg filter produce different results for pooled
+populations versus separate populations (\~1 paragraph)? References to
+the actual HW equation are suggested / appropriate.
+
+```         
+(Type answer here)
+```
+
+Use plink to query the allele frequency of rs12075 in each population
+using the `--snp` and another flag. For help, refer to
+<https://www.cog-genomics.org/plink/1.9/basic_stats#freq>
+
+### Question 15 [3 pts]
+
+What is the minor allele of rs12075 and what is its frequency in each
+population?
+
+Please fill your answers in the chart below: \> Note: spacing isn't
+important for the chart to show up in markdown, only the lines and
+dashes
+
+| Pop       | Minor Allele (A1) | MAF |
+|-----------|-------------------|-----|
+| Bench     |                   |     |
+| Chabu     |                   |     |
+| Majang    |                   |     |
+| Shekkacho |                   |     |
+| Sheko     |                   |     |
+
+### Question 16 [3pts]
+
+Calculate the expected heterozygosity of rs12075 for the Chabu using the
+allele frequencies obtained in Q15. Use the equations from lecture. Let's
+assume that this heterozygosity is the starting H0 and the Ne for the
+Chabu is 2,000. What is the expected heterozygosity Ht in 8 generations?
+Hint: Check the lecture slides for Crow and Kimura eq 3.11.2 and show
+your work
+
+```         
+(Type your answer here)
+```
+
+### Question 17 [2pts]
+
+Check out rs12075 in the dbSNP online database:
+<http://www.ncbi.nlm.nih.gov/projects/SNP/>
+
+What gene does this SNP lie in? Focusing on the HapMap populations, is
+there anything interesting about the geographic distribution of this SNP
+(i.e. which populations have the highest/lowest frequencies of the minor
+allele)?
+
+```         
+(Type your answer here)
+```
