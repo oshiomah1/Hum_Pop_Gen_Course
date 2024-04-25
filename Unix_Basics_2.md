@@ -4,7 +4,7 @@
 This tutorial will help you master essential Unix commands for data wrangling. We will focus on `grep`, `awk`, and using pipes to manipulate data effectively. 
 
 ## Exercise 0: Getting Started and Review of Unix Basics 1
-As always please navigate to your directory 
+As always please navigate to your personal student directory 
 First you must make a directory called `Unix_Basics_2` using `mkdir`. Next, ensure you have the plink binary Ethiopian files into your `Unix_Basics_2`.  These files are located
 in the `/share/ant157/unix_test_data` folder. Please use the `cp` command to copy the `.fam` `.bim` and `.bed` files into your folder. 
 
