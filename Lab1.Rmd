@@ -286,8 +286,8 @@ which to filter. For example, to filter out all SNPs that are missing in
 
 ### Question 8 [1 pt]
 
-Write the full code to filter SNPs using the  `--geno` flag on the `Ethiopians_chr1`  binary file you created using a genotyping QC command specifying that a SNP can have at most 5%
-missing data? Your output file should be called `Ethiopians_chr1_Geno_5pct`
+Write the full code to filter SNPs using the  `--geno` flag on the `Ethiopians_chr1`  binary file you created using a genotyping QC command specifying that a SNP can have at most 2%
+missing data? Your output file should be called `Ethiopians_chr1_Geno_2pct`
 
 ```         
 (Type your answer here)
