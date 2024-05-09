@@ -22,6 +22,7 @@ As always please ssh into the tadpole HPCC; navigate to your personal directory 
 
 Please use the `cp` command to copy the `Ethiopians_chr1_Update_Sex` binary files you created in the `Lab1` folder from the last assignment to the`Lab_2` directory you just created. 
 
+remember we must load the plink module using `module load plink/1.90p`
 Now run the following command to produce a QCed set to use from this point onward:
 
 ```
