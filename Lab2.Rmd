@@ -135,7 +135,7 @@ plink --bfile Ethiopians_All_UpdateSex_Sort --indep-pairwise 50 40 0.5 --out Eth
 
 Running the code above creates EthiopiansAll_LD050.prune.in and EthiopiansAll_LD050.prune.out file. We will now use the `--extract` flag to make a new set of binary files using the code below:
 ```
-plink --bfile yourdataset --extract EthiopiansAll_LD050.prune.in --make-bed --out EthiopiansAll_LDpruned050
+plink --bfile Ethiopians_All_UpdateSex_Sort --extract EthiopiansAll_LD050.prune.in --make-bed --out EthiopiansAll_LDpruned050
 ```
 
 ## Question 6 [4 pts]
