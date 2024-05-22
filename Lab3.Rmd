@@ -1,0 +1,168 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+## ANT157L Problem Set 3: Performing GWAS and Calculating Polygenic Risk Scores
+
+
+Name:
+```
+Write your name here
+```
+
+### Goals:
+A common goal in the field of genomics and medicine is to identify SNPs that are associated with specific phenotypes, often disease. This exercise will aid you performing and analyzing such associations.
+
+## Task 1:  Perform single-SNP association and GWAS
+
+Begin by navigating to your student directory and copying the ProblemSet3 folder shown here `/share/ant157/data/ProblemSet3` into your student directory. Instead of just using the `cp` command use `cp -r`. The '-r' flag means "recursive" and it used when working with a folder and all its contents inside.
+
+Next use the `mv` command to rename `ProblemSet3` to `lab3`. (You don't need to use the -r flag here)
+
+This copied folder has all the files you need. You should be working within your own student folder, not the main data directory.
+
+In order to perform SNP-phenotype associations, we must have datasets that include phenotype information. Recall that `.fam` files contain a column for individual phenotype information, shown as -9 when no phenotype information is present. Using PLINK, we can utilize the `--pheno` command in conjunction with a text file containing the phenotype information for each individual in our dataset. The syntax of this command should be very familiar; it follows the same structure as when you used the `--remove` `--keep` and `--extract` flags:
+
+```
+plink --bfile MyData --flag MyFile.txt --make-bed --out MyNewData
+```
+
+The dataset you are going to be working is labelled `1kg_EU_qc.*` and the phenotype information for these individuals is contained in `BMI_pheno.txt`.
+Use head to take a look at the `1kg_EU_qc.fam` and the `BMI_pheno.txt` files.
+
+### Question 1 [3 pts]
+
+Use the `--pheno` flag to create new bfiles named `1kg_EU_BMI` that contain the phenotype information contained in the `BMI_pheno.txt` file. Copy your command below.
+
+```
+(Type answer here)
+```
+
+What is the individual ID, sex, and BMI of the first individual in your file?
+
+```
+(Type answer here)
+```
+
+Let’s start by looking at the level of association of a single SNP, rs9674439, with the phenotype. Run the following command:
+
+```
+plink --bfile 1kg_EU_BMI --assoc --linear --out BMIrs9674439 --snps rs9674439 --allow-no-sex
+```
+
+and look at the `BMIrs9674439.assoc.linear` output. This output tells us the effect of the A1 allele for a certain SNP under a particular type of model (TEST) reflected as the regression coefficient (BETA) for that allele in the linear test. The p-value is listed in column labelled “P”.
+Specifically, your output should tell you that the association of this SNP with the phenotype was tested under an additive model, meaning that each copy of the A1 allele is considered to have the same effect on the phenotype, as opposed to a recessive model where an individual would require two copies of the A1 allele for its effect to manifest. The regression coefficient, -0.2801 , indicates that each copy of the A1 allele on this SNP results in a reduction of -0.2801  in BMI.
+
+### Question 2 [3 pts]
+
+What chromosome is this SNP on? What allele is being looked at? Is the association significant? Explain.
+
+```
+(Type answer here)
+```
+
+What happens when we test the association under a different model? Use the following command to test the association of this SNP with BMI under a dominant model:
+
+```
+ 
+
+plink --bfile 1kg_EU_BMI --assoc --linear dominant --out BMIrs9674439_dom --snps rs9674439 --allow-no-sex
+```
+
+### Question 3 [3 pts]
+
+Considered under a dominant model, what effect does the SNP have on BMI? Does the allele have a larger, smaller, or the same effect on the phenotype when considered under a dominant rather than an additive model? *Explain*. Is the association significant?
+
+```
+(Type answer here)
+```
+
+BMI, or body mass index, is a continuous (or quantitative) trait, but we could code it in a binary fashion. This means that instead of viewing the phenotype as a quantitative value, the phenotype is coded as either present or absent. The CDC defines the phenotype “overweight” as BMI >= 25.
+
+Run the shell script with a couple lines of code to create a text file that codes BMI values of 25 or above as 2 (cases) and BMI values below 25 as 1 (controls):
+
+```
+sh BinaryCoded_Pheno.sh
+```
+
+You should now have a file named `Overweight_pheno.txt`. Use this file and the
+`--pheno` command to make another set of bfiles named `1kg_EU_Overweight`.
+
+Let’s now investigate the association of the same SNP, rs9674439, with the phenotype when the phenotype is coded as a binary trait (i.e. overweight or not). This is a case-control study and so the regression and statistical test is slightly different. We must use the `--logistic` flag rather than the `--linear` flag in our command.
+Run the following command to test for the association in the case-control dataset:
+```
+plink --bfile 1kg_EU_Overweight --snps rs9674439 --assoc --logistic --out Overweight_rs9674439 --allow-no-sex
+```
+
+### Question 4 [2 pts]
+
+How does the result of this association test compare to the one performed when the phenotype data was represented quantitatively? Your answer should refer to values in the `Overweight_rs9674439.assoc.logistic` output file.
+
+```
+(Type answer here)
+```
+
+### Question 5  [2 pts]
+Now, do a GWAS by performing a linear association test under an additive model for all SNPs in the data (not just rs9674439), naming your output file `bmi_gwas_all_snps`
+
+> Hint: This is the same type of model and test that we used in our first association test.
+How many SNPs were tested in your GWAS? Recall the p-value threshold of significance for GWAS. Do any of the SNPs tested reach this level of significance?
+```
+(Type answer here)
+```
+
+## Task 2: Visualizing GWAS results with a Manhattan Plot
+
+We will be using R to generate a Manhattan plot in order to visualize our GWAS results. This is much more computationally intensive than our pca plots, so instead of moving the file to your computer and generating the manhattan plot on your local computer, we will be accessing R through tadpole on the Genome Center Server. First you will activate a conda environment so that we can easily call a specific R package.
+Copy paste this code below:
+```
+source /share/ant157/data/progs/conda/etc/profile.d/conda.sh
+conda activate R-env
+```
+
+Now that you have activated the R environment, we will enter the R program. In your terminal type R (as shown below) and hit enter.
+```
+R
+```
+
+You should now be within the R program and your prompt on the left should look like a sideways carrot. Call the `qqman` R package that we are going to use to generate a Manhattan plot.
+```
+library(qqman)
+```
+
+Read in your results. You will need to substitute the name of YOUR `.assoc.linear` file here:
+```
+gwas <- read.table("bmi_gwas_all_snps.assoc.linear", header=T)
+gwas <- gwas[!is.na(gwas$P),]
+```
+
+Generate the plot:
+```
+png(file="ManhattanPlot_BMIgwas.png", width=1200, height=600)
+manhattan(gwas, chr="CHR", bp="BP", snp="SNP", p="P")
+dev.off()
+```
+
+You should now have a `ManhattanPlot_BMIgwas.png` file in your folder. To exit R, type `q().` You will be asked if you want to save your workspace image. Type `y` and hit enter.
+You should now have exited R and can see your `ManhattanPlot_BMIgwas.png` file sitting in your directory. You can use scp to transfer it to your computer to view and include with your problem set submission.
+
+### Question 6  [4 pts]
+
+Look at your Manhattan plot. On what chromosome is your highest peak? Do you have multiple significant loci identified in the GWAS? *Make sure to submit your plot file with your homework!*
+
+```
+(Type the name of your Manhattan plot file that you are submitting on Canvas with your lab 3 assignment here)
+```
+
+```
+(Type answer here)
+```
+
+### Question 7 [2 pts]
+
+Is it likely that all the SNPs in this peak affect (i.e. are causal to) the BMI phenotype? Explain.
+
+```
+(Type your answer here)
+```
